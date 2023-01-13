@@ -1,10 +1,25 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NavBar from './components/layout/navBar';
+import NotFound from './pages/404';
+import Blog from './pages/Blog';
+import Notion from './pages/Notion';
 
 function App() {
   return (
-    <div>
-      <h1>Vite + React</h1>
-    </div>
+    <BrowserRouter>
+      <div>
+        <header>
+          <NavBar />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<Blog />} />
+            <Route path="/notion" element={<Notion />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
