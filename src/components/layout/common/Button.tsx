@@ -1,4 +1,4 @@
-import { ColorPalette } from '@src/types/color';
+import { ColorPalette } from '@src/types';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -17,6 +17,8 @@ const backgroundColor = {
   yellow: '#fde047',
   pink: '#ec4899',
   gray: '#6b7280',
+  black: '#27272a',
+  white: '#ffffff',
 };
 const hoverBackgroundColor = {
   red: '#b91c1c',
@@ -24,18 +26,20 @@ const hoverBackgroundColor = {
   yellow: '#eab308',
   pink: '#be185d',
   gray: '#374151',
+  black: '#000000',
+  white: '#f4f4f5',
 };
 const StyleBtn = styled.button<StyledBtnProps>`
   padding: 6px 12px;
   margin: 6px 12px;
   border-radius: 4px;
   font-size: 1rem;
-  border: none;
-  color: white;
+  border: ${(props) => (props.variant === 'white' ? 'solid' : 'none')};
+  color: ${(props) => (props.variant === 'white' ? 'black' : 'white')};
   background-color: ${(props) => backgroundColor[props.variant]};
   &:hover {
     cursor: pointer;
-    color: white;
+    color: ${(props) => (props.variant === 'white' ? 'black' : 'white')};
     background-color: ${(props) => hoverBackgroundColor[props.variant]};
   }
 `;
