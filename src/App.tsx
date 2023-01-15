@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import NavBar from './components/layout/navBar';
+import NavBar from './components/layout/NavBar';
 import NotFound from './pages/404';
-import Blog from './pages/Blog';
+import Blog from './pages/Blog/Blog';
 import Notion from './pages/Notion';
 
 function App() {
