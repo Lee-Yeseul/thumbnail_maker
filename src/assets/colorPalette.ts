@@ -1,4 +1,4 @@
-import { ColorPalette } from '@src/types/color';
+import { ColorPalette } from '@src/types';
 
 export const COLOR_PALETTE: ColorPalette[] = [
   'red',
@@ -6,14 +6,18 @@ export const COLOR_PALETTE: ColorPalette[] = [
   'yellow',
   'pink',
   'gray',
+  'black',
+  'white',
 ];
 
 export const colorPaletteValue = {
-  red: '#b91c1c',
-  blue: '#1d4ed8',
-  yellow: '#eab308',
-  pink: '#be185d',
-  gray: '#374151',
+  red: '#ef4444',
+  blue: '#3b82f6',
+  yellow: '#fde047',
+  pink: '#ec4899',
+  gray: '#6b7280',
+  black: '#000000',
+  white: '#ffffff',
 };
 
 // const textColor = {
