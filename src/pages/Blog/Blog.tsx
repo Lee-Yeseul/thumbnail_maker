@@ -7,7 +7,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import Title from '@src/components/layout/common/Title';
-import ImageSearch from '@src/components/layout/ImageSearch';
 import Button from '@src/components/layout/common/Button';
 import ImageSearchModal from '@src/components/layout/ImageSearchModal';
 
@@ -36,6 +35,8 @@ export default function Blog() {
     'Please enter your subtitle.'
   );
   const [isOpen, setIsOpen] = useState(false);
+
+  const [backgroundImg, setBackgroundImg] = useState<string>('');
 
   const onClickButton = () => {
     setIsOpen(true);
@@ -70,6 +71,7 @@ export default function Blog() {
         id="capture"
         textColor={selectedTextColor}
         backgroundColor={selectedBackgroundColor}
+        backgroundImage={backgroundImg}
         fontWeight={selectedFontWeight}
         fontStyle={selectedFontStyle}
         fontSize={selectedFontSize}
@@ -93,11 +95,18 @@ export default function Blog() {
         setSubtitle={(text: string) => setSubtitle(text)}
       />
       <button onClick={handleSaveImg}>캡쳐!</button>
-      <ImageSearch />
       <Button variant="blue" onClick={onClickButton}>
         Click Me !
       </Button>
-      {isOpen && <ImageSearchModal onClose={() => setIsOpen(false)} />}
+      {isOpen && (
+        <ImageSearchModal
+          onClose={() => setIsOpen(false)}
+          setBackgroundImg={(url: string) => {
+            setBackgroundImg(url);
+            console.log('here!!!', backgroundImg);
+          }}
+        />
+      )}
     </Container>
   );
 }
@@ -108,6 +117,7 @@ type PreviewPaletteProps = {
   fontWeight?: string;
   fontSize?: string;
   fontStyle?: string;
+  readonly backgroundImage: string;
 };
 
 const PreviewPalette = styled.div<PreviewPaletteProps>`
@@ -115,6 +125,7 @@ const PreviewPalette = styled.div<PreviewPaletteProps>`
   height: 360px;
   margin: 30px;
   background-color: ${(props) => props.backgroundColor};
+  background-image: url(${(props) => props.backgroundImage});
   color: ${(props) => props.textColor};
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize};

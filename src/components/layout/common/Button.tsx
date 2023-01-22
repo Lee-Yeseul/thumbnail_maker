@@ -6,6 +6,7 @@ type ButtonProps = {
   children: ReactNode;
   variant: ColorPalette;
   onClick: () => void;
+  type?: 'submit' | 'button' | 'reset';
 };
 export default function Button({ children, ...props }: ButtonProps) {
   return <StyleBtn {...props}>{children}</StyleBtn>;

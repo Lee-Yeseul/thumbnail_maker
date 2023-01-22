@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { ReactComponent as CloseIcon } from '../../../assets/icon/close.svg';
 import styled from 'styled-components';
 import ModalContainer from './ModalContainer';
@@ -31,13 +31,14 @@ export default function Modal({ onClose, children }: ModalProps) {
   return (
     <ModalContainer>
       <Overlay>
-        <ModalWrap>
-          <CloseButton ref={modalRef} onClick={handleClose}>
+        <ModalWrapper ref={modalRef}>
+          <CloseButton onClick={handleClose}>
             <CloseIcon />
           </CloseButton>
-          <Contents>{children}</Contents>
-          <Button onClick={handleClose}>Close</Button>
-        </ModalWrap>
+          <ContentsWrapper>
+            <Contents>{children}</Contents>
+          </ContentsWrapper>
+        </ModalWrapper>
       </Overlay>
     </ModalContainer>
   );
@@ -55,9 +56,9 @@ const Overlay = styled.div`
   z-index: 9999;
 `;
 
-const ModalWrap = styled.div`
-  width: 600px;
-  height: fit-content;
+const ModalWrapper = styled.div`
+  width: 700px;
+  height: 600px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
@@ -78,29 +79,22 @@ const CloseButton = styled.div`
   }
 `;
 
+const ContentsWrapper = styled.div`
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+`;
+
 const Contents = styled.div`
-  margin: 50px 30px;
+  height: 80%;
+  width: 80%;
   h1 {
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 60px;
-  }
-  img {
-    margin-top: 60px;
-    width: 300px;
-  }
-`;
-const Button = styled.button`
-  font-size: 14px;
-  padding: 10px 20px;
-  border: none;
-  background-color: #ababab;
-  border-radius: 10px;
-  color: white;
-  font-style: italic;
-  font-weight: 200;
-  cursor: pointer;
-  &:hover {
-    background-color: #898989;
   }
 `;
