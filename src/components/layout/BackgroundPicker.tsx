@@ -1,7 +1,10 @@
 import { colorPaletteValue } from '@src/assets/colorPalette';
 import { ColorPalette } from '@src/types';
+import { randomRGB } from '@src/utils';
 import { useRef } from 'react';
+import styled from 'styled-components';
 import Button from './common/Button';
+import RandomButton from './common/RandomButton';
 
 type BackgroundPickerProps = {
   setSelectedColor: (color: string) => void;
@@ -17,6 +20,13 @@ const colorPalette: ColorPalette[] = [
   'white',
 ];
 
+/**
+ * @todo
+ * gradient
+ * color picker
+ *
+ */
+
 export default function BackgroundPicker({
   setSelectedColor,
 }: BackgroundPickerProps) {
@@ -28,6 +38,7 @@ export default function BackgroundPicker({
   const handleChangeColorBrightness = () => {
     console.log(colorBrightnessInputRef.current?.value);
   };
+
   return (
     <div>
       <div>배경색</div>
@@ -42,6 +53,9 @@ export default function BackgroundPicker({
           </Button>
         );
       })}
+      <RandomButton onClick={() => handleChangeColor(randomRGB())}>
+        random
+      </RandomButton>
       <input
         type="range"
         min="100"

@@ -8,9 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <header>
-          <NavBar />
-        </header>
+        <header>{/* <NavBar /> */}</header>
         <main>
           <Routes>
             <Route path="/" element={<Blog />} />
