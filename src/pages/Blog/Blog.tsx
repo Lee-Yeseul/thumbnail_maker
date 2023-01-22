@@ -8,12 +8,15 @@ import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import Title from '@src/components/layout/common/Title';
 import ImageSearch from '@src/components/layout/ImageSearch';
+import Button from '@src/components/layout/common/Button';
+import ImageSearchModal from '@src/components/layout/ImageSearchModal';
 
 /**
  * @todo
  * drag and drop
  * unsplash img download
- *
+ * => potal로 modal 만들어서 그 안에서 unsplash img 검색하고 선택한 이미지 url을 background image로 적용하기
+ * color picker로 바꾸기
  */
 
 export default function Blog() {
@@ -32,6 +35,11 @@ export default function Blog() {
   const [subtitle, setSubtitle] = useState<string>(
     'Please enter your subtitle.'
   );
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
 
   const handleSaveImg = () => {
     const capture: HTMLElement | null = document.querySelector('#capture');
@@ -67,7 +75,7 @@ export default function Blog() {
         fontSize={selectedFontSize}
       >
         <Title variant="title">{inputText}</Title>
-        <Title variant="subTitle">{subtitle}</Title>
+        <Title variant="subtitle">{subtitle}</Title>
       </PreviewPalette>
       <BackgroundPicker
         setSelectedColor={(color: string) => setSelectedBackgroundColor(color)}
@@ -86,6 +94,10 @@ export default function Blog() {
       />
       <button onClick={handleSaveImg}>캡쳐!</button>
       <ImageSearch />
+      <Button variant="blue" onClick={onClickButton}>
+        Click Me !
+      </Button>
+      {isOpen && <ImageSearchModal onClose={() => setIsOpen(false)} />}
     </Container>
   );
 }

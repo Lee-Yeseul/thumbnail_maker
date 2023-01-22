@@ -7,7 +7,7 @@ import Notion from './pages/Notion';
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div id="modal-root">
         <header>{/* <NavBar /> */}</header>
         <main>
           <Routes>
