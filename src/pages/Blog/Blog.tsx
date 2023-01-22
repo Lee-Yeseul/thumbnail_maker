@@ -2,31 +2,23 @@ import BackgroundPicker from '@src/components/layout/BackgroundPicker';
 import Container from '@src/components/layout/common/Container';
 import TextInput from '@src/components/layout/TextInput';
 import TextColorPicker from '@src/components/layout/TextColorPicker';
-import { FontSize, FontStyle, FontWeight } from '@src/types';
 import { useState } from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import Title from '@src/components/layout/common/Title';
 import Button from '@src/components/layout/common/Button';
-import ImageSearchModal from '@src/components/layout/ImageSearchModal';
 
 /**
  * @todo
  * drag and drop
- * unsplash img download
- * => potal로 modal 만들어서 그 안에서 unsplash img 검색하고 선택한 이미지 url을 background image로 적용하기
  * color picker로 바꾸기
  */
 
 export default function Blog() {
-  const [selectedTextColor, setSelectedTextColor] = useState<string>('black');
-  const [selectedBackgroundColor, setSelectedBackgroundColor] =
-    useState<string>('white');
-  const [selectedFontWeight, setSelectedFontWeight] =
-    useState<FontWeight>('normal');
-  const [selectedFontStyle, setSelectedFontStyle] =
-    useState<FontStyle>('normal');
-  const [selectedFontSize, setSelectedFontSize] = useState<FontSize>('18px');
+  const [selectedTextColor, setSelectedTextColor] = useState<string>('white');
+  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState<
+    string[]
+  >(['black']);
 
   const [inputText, setInputText] = useState<string>(
     'Please enter your title.'
@@ -34,13 +26,8 @@ export default function Blog() {
   const [subtitle, setSubtitle] = useState<string>(
     'Please enter your subtitle.'
   );
-  const [isOpen, setIsOpen] = useState(false);
 
   const [backgroundImg, setBackgroundImg] = useState<string>('');
-
-  const onClickButton = () => {
-    setIsOpen(true);
-  };
 
   const handleSaveImg = () => {
     const capture: HTMLElement | null = document.querySelector('#capture');
@@ -64,6 +51,14 @@ export default function Blog() {
     }
   };
 
+  const handleReset = () => {
+    setSelectedTextColor('white');
+    setSelectedBackgroundColor(['black']);
+    setInputText('Please enter your title.');
+    setSubtitle('Please enter your subtitle.');
+    setBackgroundImg('');
+  };
+
   return (
     <Container>
       <Header>Thumbnail Maker!</Header>
@@ -72,60 +67,66 @@ export default function Blog() {
         textColor={selectedTextColor}
         backgroundColor={selectedBackgroundColor}
         backgroundImage={backgroundImg}
-        fontWeight={selectedFontWeight}
-        fontStyle={selectedFontStyle}
-        fontSize={selectedFontSize}
       >
         <Title variant="title">{inputText}</Title>
         <Title variant="subtitle">{subtitle}</Title>
       </PreviewPalette>
-      <BackgroundPicker
-        setSelectedColor={(color: string) => setSelectedBackgroundColor(color)}
-      />
-      <TextColorPicker
-        setSelectedColor={(color: string) => setSelectedTextColor(color)}
-        setSelectedFontWeight={(weight: FontWeight) =>
-          setSelectedFontWeight(weight)
-        }
-        setSelectedFontStyle={(style: FontStyle) => setSelectedFontStyle(style)}
-        setSelectedFontSize={(size: FontSize) => setSelectedFontSize(size)}
-      />
-      <TextInput
-        setInputText={(text: string) => setInputText(text)}
-        setSubtitle={(text: string) => setSubtitle(text)}
-      />
-      <button onClick={handleSaveImg}>캡쳐!</button>
-      <Button variant="blue" onClick={onClickButton}>
-        Click Me !
-      </Button>
-      {isOpen && (
-        <ImageSearchModal
-          onClose={() => setIsOpen(false)}
-          setBackgroundImg={(url: string) => {
-            setBackgroundImg(url);
-            console.log('here!!!', backgroundImg);
+      <div>
+        <BackgroundPicker
+          setBackgroundImg={(url: string) => setBackgroundImg(url)}
+          setSelectedColor={(type: string, color1: string, color2?: string) => {
+            if (type === 'color') {
+              setSelectedBackgroundColor([color1]);
+            }
+            if (type === 'gradient') {
+              setSelectedBackgroundColor([color1, color2!]);
+            }
           }}
         />
-      )}
+        <TextColorPicker
+          setSelectedColor={(color: string) => setSelectedTextColor(color)}
+        />
+        <TextInput
+          setInputText={(text: string) => setInputText(text)}
+          setSubtitle={(text: string) => setSubtitle(text)}
+        />
+      </div>
+      <div>
+        <Button onClick={handleReset} variant="blue">
+          Reset
+        </Button>
+        <Button onClick={handleSaveImg} variant={'blue'}>
+          Image download
+        </Button>
+      </div>
     </Container>
   );
 }
 
 type PreviewPaletteProps = {
-  readonly backgroundColor: string;
+  readonly backgroundColor: string[];
+  readonly backgroundImage: string;
+  gradientColor?: string[];
   textColor: string;
   fontWeight?: string;
   fontSize?: string;
   fontStyle?: string;
-  readonly backgroundImage: string;
 };
 
 const PreviewPalette = styled.div<PreviewPaletteProps>`
   width: 640px;
   height: 360px;
   margin: 30px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor[0]};
   background-image: url(${(props) => props.backgroundImage});
+  background: linear-gradient(
+    to bottom right,
+    ${(props) =>
+      props.backgroundColor?.length === 2 ? props.backgroundColor[0] : null},
+    ${(props) =>
+      props.backgroundColor?.length === 2 ? props.backgroundColor[1] : null}
+  );
+
   color: ${(props) => props.textColor};
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize};
@@ -139,4 +140,6 @@ const PreviewPalette = styled.div<PreviewPaletteProps>`
 const Header = styled.h1`
   font-size: 32px;
   margin-top: 30px;
+  font-weight: 700;
+  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.2);
 `;
