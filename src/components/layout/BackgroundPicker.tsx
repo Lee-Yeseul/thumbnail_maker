@@ -16,9 +16,7 @@ const colorPalette: ColorPalette[] = ['black', 'white'];
 
 /**
  * @todo
- * gradient
  * color picker
- *
  */
 
 export default function BackgroundPicker({

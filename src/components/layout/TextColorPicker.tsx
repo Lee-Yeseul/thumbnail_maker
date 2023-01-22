@@ -13,10 +13,10 @@ const colorPalette: ColorPalette[] = ['black', 'white'];
 
 /**
  * @todo
- * - FontStyle
- * - FontWeight
- * - FontSize
- * - 위치
+ * FontStyle
+ * FontWeight
+ * FontSize
+ * drag and drop
  *
  */
 

@@ -8,12 +8,6 @@ import html2canvas from 'html2canvas';
 import Title from '@src/components/layout/common/Title';
 import Button from '@src/components/layout/common/Button';
 
-/**
- * @todo
- * drag and drop
- * color picker로 바꾸기
- */
-
 export default function Blog() {
   const [selectedTextColor, setSelectedTextColor] = useState<string>('white');
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState<
