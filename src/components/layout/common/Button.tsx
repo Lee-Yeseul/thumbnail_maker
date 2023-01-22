@@ -34,6 +34,7 @@ const StyleBtn = styled.button<StyledBtnProps>`
   margin: 6px 12px;
   border-radius: 4px;
   font-size: 1rem;
+  text-transform: uppercase;
   border: ${(props) => (props.variant === 'white' ? 'solid' : 'none')};
   color: ${(props) => (props.variant === 'white' ? 'black' : 'white')};
   background-color: ${(props) => backgroundColor[props.variant]};

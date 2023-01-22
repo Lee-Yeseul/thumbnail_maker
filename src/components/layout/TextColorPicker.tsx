@@ -66,15 +66,6 @@ export default function TextColorPicker({
         >
           random
         </Button>
-        <input
-          type="range"
-          min="100"
-          max="900"
-          step="100"
-          ref={colorBrightnessInputRef}
-          onChange={handleChangeColorBrightness}
-        />
-        <label>밝기</label>
       </div>
     </div>
   );

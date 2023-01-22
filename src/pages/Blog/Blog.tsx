@@ -5,6 +5,7 @@ import TextColorPicker from '@src/components/layout/TextColorPicker';
 import { FontSize, FontStyle, FontWeight } from '@src/types';
 import { useState } from 'react';
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
 
 /**
  * @todo
@@ -26,10 +27,33 @@ export default function Blog() {
 
   const [inputText, setInputText] = useState<string>('안녕하세요');
 
+  const handleSaveImg = () => {
+    const capture: HTMLElement | null = document.querySelector('#capture');
+    if (capture !== null) {
+      html2canvas(capture).then((canvas) =>
+        saveCaptureImg(canvas.toDataURL('image/jpg'), '이미지.jpg')
+      );
+    }
+  };
+
+  const saveCaptureImg = (uri: string, filename: string) => {
+    let link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = uri;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  };
+
   return (
     <Container>
       <Header>Thumbnail Maker!</Header>
       <PreviewPalette
+        id="capture"
         textColor={selectedTextColor}
         backgroundColor={selectedBackgroundColor}
         fontWeight={selectedFontWeight}
@@ -50,6 +74,7 @@ export default function Blog() {
         setSelectedFontSize={(size: FontSize) => setSelectedFontSize(size)}
       />
       <TextInput setInputText={(text: string) => setInputText(text)} />
+      <button onClick={handleSaveImg}>캡쳐!</button>
     </Container>
   );
 }
