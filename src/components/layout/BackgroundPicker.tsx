@@ -2,7 +2,6 @@ import { colorPaletteValue } from '@src/assets/colorPalette';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
 import { useRef } from 'react';
-import styled from 'styled-components';
 import Button from './common/Button';
 import RandomButton from './common/RandomButton';
 
