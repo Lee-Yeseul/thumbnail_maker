@@ -1,23 +1,18 @@
 import { colorPaletteValue } from '@src/assets/colorPalette';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import styled from 'styled-components';
 import Button from './common/Button';
 import RandomButton from './common/RandomButton';
+import ImageSearchModal from './ImageSearchModal';
 
 type BackgroundPickerProps = {
-  setSelectedColor: (color: string) => void;
+  setSelectedColor: (type: string, color1: string, color2?: string) => void;
+  setBackgroundImg: (url: string) => void;
 };
 
-const colorPalette: ColorPalette[] = [
-  'red',
-  'blue',
-  'yellow',
-  'pink',
-  'gray',
-  'black',
-  'white',
-];
+const colorPalette: ColorPalette[] = ['black', 'white'];
 
 /**
  * @todo
@@ -28,19 +23,24 @@ const colorPalette: ColorPalette[] = [
 
 export default function BackgroundPicker({
   setSelectedColor,
+  setBackgroundImg,
 }: BackgroundPickerProps) {
-  const colorBrightnessInputRef = useRef<HTMLInputElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
 
   const handleChangeColor = (c: string) => {
-    setSelectedColor(c);
+    setSelectedColor('color', c);
   };
-  const handleChangeColorBrightness = () => {
-    console.log(colorBrightnessInputRef.current?.value);
+
+  const handleChangeGradient = (c1: string, c2: string) => {
+    setSelectedColor('gradient', c1, c2);
   };
 
   return (
-    <div>
-      <div>배경색</div>
+    <Container>
+      <div>Choose Your Background Image</div>
       {colorPalette.map((v) => {
         return (
           <Button
@@ -52,9 +52,27 @@ export default function BackgroundPicker({
           </Button>
         );
       })}
-      <RandomButton onClick={() => handleChangeColor(randomRGB())}>
+      <Button variant={'blue'} onClick={() => handleChangeColor(randomRGB())}>
         random
+      </Button>
+      <RandomButton
+        onClick={() => handleChangeGradient(randomRGB(), randomRGB())}
+      >
+        random gradient
       </RandomButton>
-    </div>
+      <Button variant="blue" onClick={onClickButton}>
+        Search Image
+      </Button>
+      {isOpen && (
+        <ImageSearchModal
+          onClose={() => setIsOpen(false)}
+          setBackgroundImg={(url: string) => setBackgroundImg(url)}
+        />
+      )}
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin-bottom: 20px;
+`;

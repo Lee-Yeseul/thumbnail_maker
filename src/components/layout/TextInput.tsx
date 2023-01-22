@@ -20,33 +20,35 @@ export default function TextInput({
     setSubtitle(subtitleInputRef.current?.value!);
   };
   return (
-    <div>
-      <label htmlFor="title">Main Title : </label>
+    <Container>
       <StyledInput
         ref={textInputRef}
         onChange={handleChangeTextInput}
         id="title"
         placeholder="Please enter your title."
       />
-      <label htmlFor="subtitle">Subtitle : </label>
       <StyledInput
         ref={subtitleInputRef}
         onChange={handleChangesubTitleInput}
         id="subtitle"
         placeholder="Please enter your subtitle."
       />
-    </div>
+    </Container>
   );
 }
 
 const StyledInput = styled.input`
   width: 200px;
   height: 32px;
-  margin: 4px;
+  margin: 4px 12px 4px 0;
   font-size: 15px;
   border: 0;
   border-radius: 4px;
   outline: none;
   padding-left: 10px;
-  background-color: #fef9c3;
+  background-color: #dbeafe;
+`;
+
+const Container = styled.div`
+  margin-bottom: 20px;
 `;

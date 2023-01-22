@@ -11,7 +11,7 @@ export default function RandomButton({ children, ...props }: ButtonProps) {
 }
 
 export const StyledRandomBtn = styled.button`
-  padding: 6px 12px;
+  padding: 8px 12px;
   margin: 6px 12px;
   border-radius: 4px;
   font-size: 1rem;
@@ -24,9 +24,9 @@ export const StyledRandomBtn = styled.button`
   border: 0;
   background-image: linear-gradient(
     to right,
-    #fbc2eb 0%,
+    #3b82f6 0%,
     #a6c1ee 51%,
-    #fbc2eb 100%
+    #3b82f6 100%
   );
   &:hover {
     cursor: pointer;
