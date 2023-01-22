@@ -2,14 +2,17 @@ import { ColorPalette } from '@src/types';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-type StyledBtnProps = {
-  readonly variant: ColorPalette;
-};
-
 type ButtonProps = {
   children: ReactNode;
   variant: ColorPalette;
   onClick: () => void;
+};
+export default function Button({ children, ...props }: ButtonProps) {
+  return <StyleBtn {...props}>{children}</StyleBtn>;
+}
+
+type StyledBtnProps = {
+  readonly variant: ColorPalette;
 };
 const backgroundColor = {
   red: '#ef4444',
@@ -44,7 +47,3 @@ const StyleBtn = styled.button<StyledBtnProps>`
     background-color: ${(props) => hoverBackgroundColor[props.variant]};
   }
 `;
-
-export default function Button({ children, ...props }: ButtonProps) {
-  return <StyleBtn {...props}>{children}</StyleBtn>;
-}

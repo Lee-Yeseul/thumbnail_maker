@@ -1,17 +1,52 @@
 import { useRef } from 'react';
+import styled from 'styled-components';
 
 type TextInputProps = {
   setInputText: (text: string) => void;
+  setSubtitle: (text: string) => void;
 };
-export default function TextInput({ setInputText }: TextInputProps) {
+export default function TextInput({
+  setInputText,
+  setSubtitle,
+}: TextInputProps) {
   const textInputRef = useRef<HTMLInputElement>(null);
+  const subtitleInputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeTextInput = () => {
     setInputText(textInputRef.current?.value!);
   };
+
+  const handleChangesubTitleInput = () => {
+    setSubtitle(subtitleInputRef.current?.value!);
+  };
   return (
     <div>
-      <input ref={textInputRef} onChange={handleChangeTextInput} />
+      <label htmlFor="title">Main Title : </label>
+      <StyledInput
+        ref={textInputRef}
+        onChange={handleChangeTextInput}
+        id="title"
+        placeholder="Please enter your title."
+      />
+      <label htmlFor="subtitle">Subtitle : </label>
+      <StyledInput
+        ref={subtitleInputRef}
+        onChange={handleChangesubTitleInput}
+        id="subtitle"
+        placeholder="Please enter your subtitle."
+      />
     </div>
   );
 }
+
+const StyledInput = styled.input`
+  width: 200px;
+  height: 32px;
+  margin: 4px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #fef9c3;
+`;

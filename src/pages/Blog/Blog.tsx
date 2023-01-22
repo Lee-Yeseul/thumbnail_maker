@@ -6,10 +6,11 @@ import { FontSize, FontStyle, FontWeight } from '@src/types';
 import { useState } from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
+import Title from '@src/components/layout/common/Title';
+import ImageSearch from '@src/components/layout/ImageSearch';
 
 /**
  * @todo
- * html2canvas
  * drag and drop
  * unsplash img download
  *
@@ -25,7 +26,12 @@ export default function Blog() {
     useState<FontStyle>('normal');
   const [selectedFontSize, setSelectedFontSize] = useState<FontSize>('18px');
 
-  const [inputText, setInputText] = useState<string>('안녕하세요');
+  const [inputText, setInputText] = useState<string>(
+    'Please enter your title.'
+  );
+  const [subtitle, setSubtitle] = useState<string>(
+    'Please enter your subtitle.'
+  );
 
   const handleSaveImg = () => {
     const capture: HTMLElement | null = document.querySelector('#capture');
@@ -60,7 +66,8 @@ export default function Blog() {
         fontStyle={selectedFontStyle}
         fontSize={selectedFontSize}
       >
-        {inputText}
+        <Title variant="title">{inputText}</Title>
+        <Title variant="subTitle">{subtitle}</Title>
       </PreviewPalette>
       <BackgroundPicker
         setSelectedColor={(color: string) => setSelectedBackgroundColor(color)}
@@ -73,8 +80,12 @@ export default function Blog() {
         setSelectedFontStyle={(style: FontStyle) => setSelectedFontStyle(style)}
         setSelectedFontSize={(size: FontSize) => setSelectedFontSize(size)}
       />
-      <TextInput setInputText={(text: string) => setInputText(text)} />
+      <TextInput
+        setInputText={(text: string) => setInputText(text)}
+        setSubtitle={(text: string) => setSubtitle(text)}
+      />
       <button onClick={handleSaveImg}>캡쳐!</button>
+      <ImageSearch />
     </Container>
   );
 }
@@ -96,6 +107,10 @@ const PreviewPalette = styled.div<PreviewPaletteProps>`
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize};
   font-style: ${(props) => props.fontStyle};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Header = styled.h1`
