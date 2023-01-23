@@ -24,6 +24,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # https://<USERNAME>.github.io/<REPO> 에 배포
-# git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
+git push -f git@github.com:Lee-Yeseul/thumbnail_maker.git main:gh-pages
 
 cd -

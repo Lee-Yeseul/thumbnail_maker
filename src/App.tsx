@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFound from './pages/404';
-import Blog from './pages/Blog/Blog';
+import Blog from './pages/Blog/';
 
 export default function App() {
   return (
@@ -8,8 +8,8 @@ export default function App() {
       <div id="modal-root">
         <main>
           <Routes>
-            <Route path="/" element={<Blog />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<Blog />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
       </div>
