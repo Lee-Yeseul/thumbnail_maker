@@ -9,7 +9,7 @@
   - [🗂폴더 구조](#폴더-구조)
   - [⚙️ 설치 환경 실행 방법](#️-설치-환경-실행-방법)
 
-## 🔗 Link
+## 🔗 https://lee-yeseul.github.io/thumbnail_maker/
 
 ☞ 배포 후 추가될 예정입니다.
 
