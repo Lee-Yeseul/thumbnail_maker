@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { colorPaletteValue } from '@src/assets/colorPalette';
+import { ReactComponent as SearchIcon } from '@src/assets/icon/search.svg';
 import Button from '@components/common/Button';
 import RandomButton from '@components/common/RandomButton';
 import ImageSearchModal from '@components/ImageSearchModal';
@@ -56,7 +57,10 @@ export default function BackgroundPicker({
           </Button>
         );
       })}
-      <Button variant={'blue'} onClick={() => handleChangeColor(randomRGB())}>
+      <Button
+        variant={'primary'}
+        onClick={() => handleChangeColor(randomRGB())}
+      >
         random
       </Button>
       <RandomButton
@@ -64,8 +68,8 @@ export default function BackgroundPicker({
       >
         random gradient
       </RandomButton>
-      <Button variant="blue" onClick={onClickButton}>
-        Search Image
+      <Button variant="yellow" onClick={onClickButton}>
+        <SearchIcon width={'24px'} height={'18px'} />
       </Button>
       {isOpen && (
         <ImageSearchModal

@@ -24,9 +24,9 @@ export const StyledRandomBtn = styled.button`
   border: 0;
   background-image: linear-gradient(
     to right,
-    #3b82f6 0%,
-    #a6c1ee 51%,
-    #3b82f6 100%
+    #a78bfa 0%,
+    #fde68a 51%,
+    #a78bfa 100%
   );
   &:hover {
     cursor: pointer;

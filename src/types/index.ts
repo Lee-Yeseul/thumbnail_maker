@@ -5,7 +5,10 @@ export type ColorPalette =
   | 'pink'
   | 'gray'
   | 'black'
-  | 'white';
+  | 'white'
+  | 'primary'
+  | 'dark'
+  | 'light';
 
 export type FontStyle = 'normal' | 'italic';
 

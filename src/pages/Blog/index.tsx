@@ -86,10 +86,10 @@ export default function Blog() {
         />
       </div>
       <div>
-        <Button onClick={handleReset} variant="blue">
+        <Button onClick={handleReset} variant="light">
           Reset
         </Button>
-        <Button onClick={handleSaveImg} variant={'blue'}>
+        <Button onClick={handleSaveImg} variant={'dark'}>
           Image download
         </Button>
       </div>
@@ -135,5 +135,6 @@ const H1 = styled.h1`
   font-size: 32px;
   margin-top: 30px;
   font-weight: 700;
-  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px #fef08a;
+  color: #8b5cf6;
 `;

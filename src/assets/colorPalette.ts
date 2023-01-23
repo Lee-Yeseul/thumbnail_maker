@@ -12,11 +12,14 @@ export const COLOR_PALETTE: ColorPalette[] = [
 
 export const colorPaletteValue = {
   red: '#ef4444',
+  yellow: '#fde68a',
   blue: '#3b82f6',
-  yellow: '#fde047',
-  pink: '#ec4899',
+  pink: '#f472b6',
   gray: '#6b7280',
-  black: '#000000',
+  primary: '#a78bfa',
+  dark: '#7c3aed',
+  light: '#c4b5fd',
+  black: '#27272a',
   white: '#ffffff',
 };
 
