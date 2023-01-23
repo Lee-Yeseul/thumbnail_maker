@@ -36,7 +36,6 @@ export default function ImageSearchModal({
 
   const handleClickImg = (url: string) => {
     setBackgroundImg(url);
-    console.log(url);
     onClose();
   };
 
