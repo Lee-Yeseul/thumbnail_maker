@@ -1,9 +1,8 @@
 import { ReactNode, useEffect, useRef } from 'react';
-import { ReactComponent as CloseIcon } from '@src/assets/icon/close.svg';
 import styled from 'styled-components';
-import ModalContainer from './ModalContainer';
+import { ReactComponent as CloseIcon } from '@src/assets/icon/close.svg';
+import ModalContainer from '@components/common/ModalContainer';
 import useOutSideClick from '@src/hooks/useOutSideClick';
-import Button from './Button';
 
 type ModalProps = {
   onClose: () => void;
