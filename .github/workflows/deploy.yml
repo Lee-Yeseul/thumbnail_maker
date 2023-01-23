@@ -7,18 +7,28 @@ on:
 
 jobs:
   build:
+    #해당 job의 이름을 설정해 actions 탭에서 확인가능하게 설정
     name: Build
     runs-on: ubuntu-latest
 
     steps:
+      #해당 레포지토리로 checkout
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      #node 환경 설정
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: 18.13.0
 
+      - name: Generate Environment Variable File for Production
+        run: |
+          echo "VITE_UNSPLASH_ACCESS_KEY=$VITE_UNSPLASH_ACCESS_KEY" >> .env.production
+        env:
+          VITE_UNSPLASH_ACCESS_KEY: ${{ secrets.VITE_UNSPLASH_ACCESS_KEY }}
+
+      #라이브러리 설치
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
