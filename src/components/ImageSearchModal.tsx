@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Button from './common/Button';
-import Modal from './common/Modal';
+import Button from '@components/common/Button';
+import Modal from '@components/common/Modal';
 const { VITE_UNSPLASH_ACCESS_KEY } = import.meta.env;
 
 type ImageSearchModalProps = {

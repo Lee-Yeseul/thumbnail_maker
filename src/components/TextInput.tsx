@@ -2,18 +2,15 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 
 type TextInputProps = {
-  setInputText: (text: string) => void;
+  setTitle: (text: string) => void;
   setSubtitle: (text: string) => void;
 };
-export default function TextInput({
-  setInputText,
-  setSubtitle,
-}: TextInputProps) {
-  const textInputRef = useRef<HTMLInputElement>(null);
+export default function TextInput({ setTitle, setSubtitle }: TextInputProps) {
+  const titleInputRef = useRef<HTMLInputElement>(null);
   const subtitleInputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeTextInput = () => {
-    setInputText(textInputRef.current?.value!);
+    setTitle(titleInputRef.current?.value!);
   };
 
   const handleChangesubTitleInput = () => {
@@ -22,7 +19,7 @@ export default function TextInput({
   return (
     <Container>
       <StyledInput
-        ref={textInputRef}
+        ref={titleInputRef}
         onChange={handleChangeTextInput}
         id="title"
         placeholder="Please enter your title."

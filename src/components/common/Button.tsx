@@ -1,6 +1,6 @@
-import { ColorPalette } from '@src/types';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { ColorPalette } from '@src/types';
 
 type ButtonProps = {
   children: ReactNode;

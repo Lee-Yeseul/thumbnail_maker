@@ -1,14 +1,20 @@
+import { useState } from 'react';
+import styled from 'styled-components';
 import { colorPaletteValue } from '@src/assets/colorPalette';
+import Button from '@components/common/Button';
+import RandomButton from '@components/common/RandomButton';
+import ImageSearchModal from '@components/ImageSearchModal';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
-import Button from './common/Button';
-import RandomButton from './common/RandomButton';
-import ImageSearchModal from './ImageSearchModal';
+
+type BackgroundType = 'color' | 'gradient';
 
 type BackgroundPickerProps = {
-  setSelectedColor: (type: string, color1: string, color2?: string) => void;
+  setSelectedColor: (
+    type: BackgroundType,
+    color1: string,
+    color2?: string
+  ) => void;
   setBackgroundImg: (url: string) => void;
 };
 

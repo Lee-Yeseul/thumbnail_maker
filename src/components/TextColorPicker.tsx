@@ -1,9 +1,8 @@
-import { colorPaletteValue } from '@src/assets/colorPalette';
-import { ColorPalette, FontSize, FontStyle, FontWeight } from '@src/types';
-import { randomRGB } from '@src/utils';
-import { useRef } from 'react';
 import styled from 'styled-components';
-import Button from './common/Button';
+import { colorPaletteValue } from '@src/assets/colorPalette';
+import Button from '@components/common/Button';
+import { ColorPalette } from '@src/types';
+import { randomRGB } from '@src/utils';
 
 type BackgroundPickerProps = {
   setSelectedColor: (color: string) => void;

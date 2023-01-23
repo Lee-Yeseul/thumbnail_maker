@@ -1,26 +1,26 @@
-import BackgroundPicker from '@src/components/layout/BackgroundPicker';
-import Container from '@src/components/layout/common/Container';
-import TextInput from '@src/components/layout/TextInput';
-import TextColorPicker from '@src/components/layout/TextColorPicker';
 import { useState } from 'react';
-import styled from 'styled-components';
 import html2canvas from 'html2canvas';
-import Title from '@src/components/layout/common/Title';
-import Button from '@src/components/layout/common/Button';
+import styled from 'styled-components';
+import BackgroundPicker from '@components/BackgroundPicker';
+import Container from '@components/common/Container';
+import TextInput from '@components/TextInput';
+import TextColorPicker from '@components/TextColorPicker';
+import Title from '@components/common/Title';
+import Button from '@components/common/Button';
+
+const INITIAL_TITLE = 'Please enter your title.';
+const INITIAL_SUBTITLE = 'Please enter your subtitle.';
+const INITIAL_BACKGROUND_COLOR = 'black';
+const INITIAL_TEXT_COLOR = 'white';
 
 export default function Blog() {
-  const [selectedTextColor, setSelectedTextColor] = useState<string>('white');
-  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState<
-    string[]
-  >(['black']);
-
-  const [inputText, setInputText] = useState<string>(
-    'Please enter your title.'
-  );
-  const [subtitle, setSubtitle] = useState<string>(
-    'Please enter your subtitle.'
-  );
-
+  const [selectedTextColor, setSelectedTextColor] =
+    useState(INITIAL_TEXT_COLOR);
+  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState([
+    INITIAL_BACKGROUND_COLOR,
+  ]);
+  const [title, setTitle] = useState(INITIAL_TITLE);
+  const [subtitle, setSubtitle] = useState(INITIAL_SUBTITLE);
   const [backgroundImg, setBackgroundImg] = useState<string>('');
 
   const handleSaveImg = () => {
@@ -46,23 +46,23 @@ export default function Blog() {
   };
 
   const handleReset = () => {
-    setSelectedTextColor('white');
-    setSelectedBackgroundColor(['black']);
-    setInputText('Please enter your title.');
-    setSubtitle('Please enter your subtitle.');
+    setSelectedTextColor(INITIAL_TEXT_COLOR);
+    setSelectedBackgroundColor([INITIAL_BACKGROUND_COLOR]);
+    setTitle(INITIAL_TITLE);
+    setSubtitle(INITIAL_SUBTITLE);
     setBackgroundImg('');
   };
 
   return (
     <Container>
-      <Header>Thumbnail Maker!</Header>
+      <H1>Thumbnail Maker!</H1>
       <PreviewPalette
         id="capture"
         textColor={selectedTextColor}
         backgroundColor={selectedBackgroundColor}
         backgroundImage={backgroundImg}
       >
-        <Title variant="title">{inputText}</Title>
+        <Title variant="title">{title}</Title>
         <Title variant="subtitle">{subtitle}</Title>
       </PreviewPalette>
       <div>
@@ -81,7 +81,7 @@ export default function Blog() {
           setSelectedColor={(color: string) => setSelectedTextColor(color)}
         />
         <TextInput
-          setInputText={(text: string) => setInputText(text)}
+          setTitle={(text: string) => setTitle(text)}
           setSubtitle={(text: string) => setSubtitle(text)}
         />
       </div>
@@ -131,7 +131,7 @@ const PreviewPalette = styled.div<PreviewPaletteProps>`
   align-items: center;
 `;
 
-const Header = styled.h1`
+const H1 = styled.h1`
   font-size: 32px;
   margin-top: 30px;
   font-weight: 700;
