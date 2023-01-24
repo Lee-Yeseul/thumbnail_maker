@@ -25,13 +25,13 @@ const hoverBackgroundColor = {
   gray: '#4b5563',
   primary: '#8b5cf6',
   dark: '#6d28d9',
-  light: '#c4b5fd',
+  light: '#9e8fd9',
   black: '#000000',
   white: '#f4f4f5',
 };
 
 const StyleBtn = styled.button<StyledBtnProps>`
-  padding: 8px 12px;
+  padding: 6px 12px;
   margin: 6px 12px 6px 0;
   border-radius: 4px;
   font-size: 1rem;
