@@ -60,7 +60,7 @@ export default function ImageSearchModal({
                 key={val.id}
                 src={val.urls.thumb}
                 alt={val.alt_description}
-                onClick={() => handleClickImg(val.urls.thumb)}
+                onClick={() => handleClickImg(val.urls.regular)}
               />
             );
           })}
