@@ -41,7 +41,10 @@ export default function TextColorPicker({
             </Button>
           );
         })}
-        <Button variant={'blue'} onClick={() => handleChangeColor(randomRGB())}>
+        <Button
+          variant={'primary'}
+          onClick={() => handleChangeColor(randomRGB())}
+        >
           random
         </Button>
       </div>

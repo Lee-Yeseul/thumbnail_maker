@@ -43,7 +43,7 @@ const StyledInput = styled.input`
   border-radius: 4px;
   outline: none;
   padding-left: 10px;
-  background-color: #dbeafe;
+  background-color: #ede9fe;
 `;
 
 const Container = styled.div`

@@ -39,10 +39,12 @@ export default function BackgroundPicker({
 
   const handleChangeColor = (c: string) => {
     setSelectedColor('color', c);
+    setBackgroundImg('');
   };
 
   const handleChangeGradient = (c1: string, c2: string) => {
     setSelectedColor('gradient', c1, c2);
+    setBackgroundImg('');
   };
 
   const handleClickSearchImg = () => {
@@ -67,7 +69,10 @@ export default function BackgroundPicker({
           </Button>
         );
       })}
-      <Button variant={'blue'} onClick={() => handleChangeColor(randomRGB())}>
+      <Button
+        variant={'primary'}
+        onClick={() => handleChangeColor(randomRGB())}
+      >
         random
       </Button>
       <RandomButton

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ColorPalette } from '@src/types';
+import { colorPaletteValue } from '@src/assets/colorPalette';
 
 type ButtonProps = {
   children: ReactNode;
@@ -15,33 +16,29 @@ export default function Button({ children, ...props }: ButtonProps) {
 type StyledBtnProps = {
   readonly variant: ColorPalette;
 };
-const backgroundColor = {
-  red: '#ef4444',
-  blue: '#3b82f6',
-  yellow: '#fde047',
-  pink: '#f472b6',
-  gray: '#6b7280',
-  black: '#27272a',
-  white: '#ffffff',
-};
+
 const hoverBackgroundColor = {
-  red: '#b91c1c',
-  blue: '#1d4ed8',
-  yellow: '#eab308',
+  red: '#ef4444',
+  yellow: '#facc15',
+  blue: '#2563eb',
   pink: '#ec4899',
-  gray: '#374151',
+  gray: '#4b5563',
+  primary: '#8b5cf6',
+  dark: '#6d28d9',
+  light: '#9e8fd9',
   black: '#000000',
   white: '#f4f4f5',
 };
+
 const StyleBtn = styled.button<StyledBtnProps>`
-  padding: 8px 12px;
+  padding: 6px 12px;
   margin: 6px 12px 6px 0;
   border-radius: 4px;
   font-size: 1rem;
   text-transform: uppercase;
   border: ${(props) => (props.variant === 'white' ? 'solid' : 'none')};
   color: ${(props) => (props.variant === 'white' ? 'black' : 'white')};
-  background-color: ${(props) => backgroundColor[props.variant]};
+  background-color: ${(props) => colorPaletteValue[props.variant]};
   &:hover {
     cursor: pointer;
     color: ${(props) => (props.variant === 'white' ? 'black' : 'white')};
