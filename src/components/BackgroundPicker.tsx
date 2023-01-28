@@ -37,10 +37,12 @@ export default function BackgroundPicker({
 
   const handleChangeColor = (c: string) => {
     setSelectedColor('color', c);
+    setBackgroundImg('');
   };
 
   const handleChangeGradient = (c1: string, c2: string) => {
     setSelectedColor('gradient', c1, c2);
+    setBackgroundImg('');
   };
 
   return (
