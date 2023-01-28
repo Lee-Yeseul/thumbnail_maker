@@ -2,11 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { colorPaletteValue } from '@src/assets/colorPalette';
 import { ReactComponent as SearchIcon } from '@src/assets/icon/search.svg';
+import { ReactComponent as AddIcon } from '@src/assets/icon/add.svg';
+
 import Button from '@components/common/Button';
 import RandomButton from '@components/common/RandomButton';
 import ImageSearchModal from '@components/ImageSearchModal';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
+import AddCustomImageModal from './AddCustomImageModal';
 
 type BackgroundType = 'color' | 'gradient';
 
@@ -30,10 +33,9 @@ export default function BackgroundPicker({
   setSelectedColor,
   setBackgroundImg,
 }: BackgroundPickerProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const onClickButton = () => {
-    setIsOpen(true);
-  };
+  const [isImageSearchModalOpen, setIsImageSearchModalOpen] = useState(false);
+  const [isAddCustomImageModalOpen, setIsAddCustomImageModalOpen] =
+    useState(false);
 
   const handleChangeColor = (c: string) => {
     setSelectedColor('color', c);
@@ -43,6 +45,14 @@ export default function BackgroundPicker({
   const handleChangeGradient = (c1: string, c2: string) => {
     setSelectedColor('gradient', c1, c2);
     setBackgroundImg('');
+  };
+
+  const handleClickSearchImg = () => {
+    setIsImageSearchModalOpen(true);
+  };
+
+  const handleClickAddCustomImg = () => {
+    setIsAddCustomImageModalOpen(true);
   };
 
   return (
@@ -70,12 +80,21 @@ export default function BackgroundPicker({
       >
         random gradient
       </RandomButton>
-      <Button variant="yellow" onClick={onClickButton}>
+      <Button variant="yellow" onClick={handleClickAddCustomImg}>
+        <AddIcon width={'18px'} height={'18px'} fill="white" />
+      </Button>
+      {isAddCustomImageModalOpen && (
+        <AddCustomImageModal
+          onClose={() => setIsAddCustomImageModalOpen(false)}
+          setBackgroundImg={(url: string) => setBackgroundImg(url)}
+        />
+      )}
+      <Button variant="yellow" onClick={handleClickSearchImg}>
         <SearchIcon width={'24px'} height={'18px'} />
       </Button>
-      {isOpen && (
+      {isImageSearchModalOpen && (
         <ImageSearchModal
-          onClose={() => setIsOpen(false)}
+          onClose={() => setIsImageSearchModalOpen(false)}
           setBackgroundImg={(url: string) => setBackgroundImg(url)}
         />
       )}
