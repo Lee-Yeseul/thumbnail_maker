@@ -58,7 +58,7 @@ const Overlay = styled.div`
 
 const ModalWrapper = styled.div`
   width: 700px;
-  height: 600px;
+  height: fit-content;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
