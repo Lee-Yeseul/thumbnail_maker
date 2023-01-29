@@ -7,9 +7,9 @@ import { ReactComponent as AddIcon } from '@src/assets/icon/add.svg';
 import Button from '@components/common/Button';
 import RandomButton from '@components/common/RandomButton';
 import ImageSearchModal from '@components/ImageSearchModal';
+import AddCustomImageModal from '@components/AddCustomImageModal';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
-import AddCustomImageModal from './AddCustomImageModal';
 
 type BackgroundType = 'color' | 'gradient';
 

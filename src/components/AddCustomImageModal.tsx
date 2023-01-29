@@ -9,10 +9,8 @@ type ImageSearchModalProps = {
 };
 /**
  * @todo
- * fetch error boundary 추가하기
- * searchResults 배열이 비었을 때 보여줄 내용 추가하기
- * enter 클릭시 search 되도록
- * search debounce 추가하기
+ * open image가 아닐 경우 html2canvas로 다운로드가 안됨
+ * 해당 부분 에러 처리하기
  *
  */
 export default function AddCustomImageModal({
