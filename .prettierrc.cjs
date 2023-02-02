@@ -8,5 +8,5 @@ module.exports = {
   //문자열은 작은 따옴표
   singleQuote: true,
   // 코드 한줄 max
-  printWith: 80,
+  printWidth: 80,
 };
