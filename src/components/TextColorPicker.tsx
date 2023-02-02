@@ -42,7 +42,7 @@ export default function TextColorPicker({
           );
         })}
         <Button
-          variant={'primary'}
+          variant="primary"
           onClick={() => handleChangeColor(randomRGB())}
         >
           random

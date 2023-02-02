@@ -69,10 +69,7 @@ export default function BackgroundPicker({
           </Button>
         );
       })}
-      <Button
-        variant={'primary'}
-        onClick={() => handleChangeColor(randomRGB())}
-      >
+      <Button variant="primary" onClick={() => handleChangeColor(randomRGB())}>
         random
       </Button>
       <RandomButton
@@ -81,7 +78,7 @@ export default function BackgroundPicker({
         random gradient
       </RandomButton>
       <Button variant="yellow" onClick={handleClickAddCustomImg}>
-        <AddIcon width={'18px'} height={'18px'} fill="white" />
+        <AddIcon width="18px" height="18px" fill="white" />
       </Button>
       {isAddCustomImageModalOpen && (
         <AddCustomImageModal
@@ -90,7 +87,7 @@ export default function BackgroundPicker({
         />
       )}
       <Button variant="yellow" onClick={handleClickSearchImg}>
-        <SearchIcon width={'24px'} height={'18px'} />
+        <SearchIcon width="24px" height="18px" />
       </Button>
       {isImageSearchModalOpen && (
         <ImageSearchModal

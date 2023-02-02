@@ -36,7 +36,7 @@ export default function Blog() {
   };
 
   const saveCaptureImg = (uri: string, filename: string) => {
-    let link = document.createElement('a');
+    const link = document.createElement('a');
     if (typeof link.download === 'string') {
       link.href = uri;
       link.download = filename;
@@ -97,7 +97,7 @@ export default function Blog() {
         <Button onClick={handleReset} variant="light">
           Reset
         </Button>
-        <Button onClick={handleSaveImg} variant={'dark'}>
+        <Button onClick={handleSaveImg} variant="dark">
           Image download
         </Button>
       </div>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from './common/Button';
 import { ViewType } from '@src/types';
+import Button from './common/Button';
 
 type ViewTypePicker = {
   viewType: ViewType;

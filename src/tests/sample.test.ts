@@ -7,6 +7,6 @@ describe('js test', () => {
   it('string test', () => {
     const name = 'yeseul';
 
-    expect(name).toBe('yeseul'); // name이 J4J인지 테스트
+    expect(name).toBe('yeseul'); // string 테스트
   });
 });

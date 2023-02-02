@@ -20,7 +20,7 @@ export default function Modal({ onClose, children }: ModalProps) {
   useEffect(() => {
     const $body = document.querySelector('body');
     if ($body !== null) {
-      const overflow = $body.style.overflow;
+      const { overflow } = $body.style;
       $body.style.overflow = 'hidden';
       return () => {
         $body.style.overflow = overflow;
