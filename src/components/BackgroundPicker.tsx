@@ -11,6 +11,10 @@ import AddCustomImageModal from '@components/AddCustomImageModal';
 import { ColorPalette } from '@src/types';
 import { randomRGB } from '@src/utils';
 
+const Container = styled.div`
+  margin-bottom: 20px;
+`;
+
 type BackgroundType = 'color' | 'gradient';
 
 type BackgroundPickerProps = {
@@ -98,7 +102,3 @@ export default function BackgroundPicker({
     </Container>
   );
 }
-
-const Container = styled.div`
-  margin-bottom: 20px;
-`;

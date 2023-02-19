@@ -5,9 +5,38 @@ import Modal from '@components/common/Modal';
 
 const { VITE_UNSPLASH_ACCESS_KEY } = import.meta.env;
 
+const StyledInput = styled.input`
+  width: 400px;
+  height: 32px;
+  margin: 4px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #fef9c3;
+`;
+
+const ImageContainer = styled.div`
+  margin: 12px 4px;
+`;
+
+const Image = styled.img`
+  padding: 4px;
+`;
+
 type ImageSearchModalProps = {
   onClose: () => void;
   setBackgroundImg: (url: string) => void;
+};
+
+type ImageValue = {
+  id: string;
+  urls: {
+    thumb: string;
+    regular: string;
+  };
+  alt_description: string;
 };
 /**
  * @todo
@@ -35,8 +64,8 @@ export default function ImageSearchModal({
     fetchRequest();
   };
 
-  const handleClickImg = (url: string) => {
-    setBackgroundImg(url);
+  const handleClickImg = (imgUrl: string) => {
+    setBackgroundImg(imgUrl);
     onClose();
   };
 
@@ -55,7 +84,7 @@ export default function ImageSearchModal({
           </Button>
         </div>
         <ImageContainer>
-          {searchResults.map((val: any) => {
+          {searchResults.map((val: ImageValue) => {
             return (
               <Image
                 key={val.id}
@@ -70,23 +99,3 @@ export default function ImageSearchModal({
     </Modal>
   );
 }
-
-const StyledInput = styled.input`
-  width: 400px;
-  height: 32px;
-  margin: 4px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 4px;
-  outline: none;
-  padding-left: 10px;
-  background-color: #fef9c3;
-`;
-
-const ImageContainer = styled.div`
-  margin: 12px 4px;
-`;
-
-const Image = styled.img`
-  padding: 4px;
-`;

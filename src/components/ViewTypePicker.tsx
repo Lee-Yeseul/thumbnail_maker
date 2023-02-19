@@ -2,14 +2,18 @@ import styled from 'styled-components';
 import { ViewType } from '@src/types';
 import Button from './common/Button';
 
-type ViewTypePicker = {
+const Container = styled.div`
+  margin-bottom: 20px;
+`;
+
+type ViewTypePickerParams = {
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
 };
 export default function ViewTypePicker({
   viewType,
   setViewType,
-}: ViewTypePicker) {
+}: ViewTypePickerParams) {
   const handleChangeViewType = () => {
     if (viewType === 'notion') {
       setViewType('blog');
@@ -26,7 +30,3 @@ export default function ViewTypePicker({
     </Container>
   );
 }
-
-const Container = styled.div`
-  margin-bottom: 20px;
-`;
