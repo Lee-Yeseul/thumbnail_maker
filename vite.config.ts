@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from 'vite';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { resolve } from 'path';

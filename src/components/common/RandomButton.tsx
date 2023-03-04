@@ -6,10 +6,6 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-export default function RandomButton({ children, ...props }: ButtonProps) {
-  return <StyledRandomBtn {...props}>{children}</StyledRandomBtn>;
-}
-
 export const StyledRandomBtn = styled.button`
   padding: 8px 12px;
   margin: 6px 12px;
@@ -33,3 +29,7 @@ export const StyledRandomBtn = styled.button`
     background-position: right center;
   }
 `;
+
+export default function RandomButton({ children, ...props }: ButtonProps) {
+  return <StyledRandomBtn {...props}>{children}</StyledRandomBtn>;
+}

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import NotFound from './pages/404';
-import Blog from './pages/Blog/';
+import Blog from './pages/Blog';
 
 export default function App() {
   return (

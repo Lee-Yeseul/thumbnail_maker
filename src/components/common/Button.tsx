@@ -3,18 +3,16 @@ import styled from 'styled-components';
 import { ColorPalette } from '@src/types';
 import { colorPaletteValue } from '@src/assets/colorPalette';
 
+type StyledBtnProps = {
+  readonly variant: ColorPalette;
+};
+
 type ButtonProps = {
   children: ReactNode;
   variant: ColorPalette;
   onClick: () => void;
+  // eslint-disable-next-line react/require-default-props
   type?: 'submit' | 'button' | 'reset';
-};
-export default function Button({ children, ...props }: ButtonProps) {
-  return <StyleBtn {...props}>{children}</StyleBtn>;
-}
-
-type StyledBtnProps = {
-  readonly variant: ColorPalette;
 };
 
 const hoverBackgroundColor = {
@@ -45,3 +43,7 @@ const StyleBtn = styled.button<StyledBtnProps>`
     background-color: ${(props) => hoverBackgroundColor[props.variant]};
   }
 `;
+
+export default function Button({ children, ...props }: ButtonProps) {
+  return <StyleBtn {...props}>{children}</StyleBtn>;
+}

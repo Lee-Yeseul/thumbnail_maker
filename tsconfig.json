@@ -22,6 +22,12 @@
       "@styles/*": ["src/styles/*"]
     }
   },
-  "include": [".eslintrc.cjs", "src", "custom.d.ts"],
+  "include": [
+    ".eslintrc.cjs",
+    "src",
+    "custom.d.ts",
+    "jest.config.cjs",
+    "vite.config.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
