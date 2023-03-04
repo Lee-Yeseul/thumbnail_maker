@@ -9,41 +9,6 @@ type ModalProps = {
   children: ReactNode;
 };
 
-export default function Modal({ onClose, children }: ModalProps) {
-  const modalRef = useRef(null);
-  const handleClose = () => {
-    onClose?.();
-  };
-
-  useOutSideClick(modalRef, handleClose);
-
-  useEffect(() => {
-    const $body = document.querySelector('body');
-    if ($body !== null) {
-      const overflow = $body.style.overflow;
-      $body.style.overflow = 'hidden';
-      return () => {
-        $body.style.overflow = overflow;
-      };
-    }
-  }, []);
-
-  return (
-    <ModalContainer>
-      <Overlay>
-        <ModalWrapper ref={modalRef}>
-          <CloseButton onClick={handleClose}>
-            <CloseIcon />
-          </CloseButton>
-          <ContentsWrapper>
-            <Contents>{children}</Contents>
-          </ContentsWrapper>
-        </ModalWrapper>
-      </Overlay>
-    </ModalContainer>
-  );
-}
-
 const Overlay = styled.div`
   position: fixed;
   width: 100%;
@@ -98,3 +63,39 @@ const Contents = styled.div`
     margin-bottom: 60px;
   }
 `;
+
+export default function Modal({ onClose, children }: ModalProps) {
+  const modalRef = useRef(null);
+  const handleClose = () => {
+    onClose?.();
+  };
+
+  useOutSideClick(modalRef, handleClose);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    const $body = document.querySelector('body');
+    if ($body !== null) {
+      const { overflow } = $body.style;
+      $body.style.overflow = 'hidden';
+      return () => {
+        $body.style.overflow = overflow;
+      };
+    }
+  }, []);
+
+  return (
+    <ModalContainer>
+      <Overlay>
+        <ModalWrapper ref={modalRef}>
+          <CloseButton onClick={handleClose}>
+            <CloseIcon />
+          </CloseButton>
+          <ContentsWrapper>
+            <Contents>{children}</Contents>
+          </ContentsWrapper>
+        </ModalWrapper>
+      </Overlay>
+    </ModalContainer>
+  );
+}

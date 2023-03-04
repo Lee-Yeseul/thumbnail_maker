@@ -1,6 +1,22 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 
+const StyledInput = styled.input`
+  width: 200px;
+  height: 32px;
+  margin: 4px 12px 4px 0;
+  font-size: 15px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #ede9fe;
+`;
+
+const Container = styled.div`
+  margin-bottom: 20px;
+`;
+
 type TextInputProps = {
   setTitle: (text: string) => void;
   setSubtitle: (text: string) => void;
@@ -10,11 +26,11 @@ export default function TextInput({ setTitle, setSubtitle }: TextInputProps) {
   const subtitleInputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeTextInput = () => {
-    setTitle(titleInputRef.current?.value!);
+    setTitle(titleInputRef.current?.value as string);
   };
 
   const handleChangesubTitleInput = () => {
-    setSubtitle(subtitleInputRef.current?.value!);
+    setSubtitle(subtitleInputRef.current?.value as string);
   };
   return (
     <Container>
@@ -33,19 +49,3 @@ export default function TextInput({ setTitle, setSubtitle }: TextInputProps) {
     </Container>
   );
 }
-
-const StyledInput = styled.input`
-  width: 200px;
-  height: 32px;
-  margin: 4px 12px 4px 0;
-  font-size: 15px;
-  border: 0;
-  border-radius: 4px;
-  outline: none;
-  padding-left: 10px;
-  background-color: #ede9fe;
-`;
-
-const Container = styled.div`
-  margin-bottom: 20px;
-`;
