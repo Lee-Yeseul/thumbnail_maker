@@ -1,5 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Thumbnail%20Maker&fontSize=90)
-test
+
 # 목차
 
 - [목차](#목차)
