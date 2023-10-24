@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
@@ -38,6 +38,11 @@ type ImageValue = {
   };
   alt_description: string;
 };
+
+type UnsplashResponse = {
+  results: any[];
+  total_pages: number;
+};
 /**
  * @todo
  * fetch error boundary 추가하기
@@ -50,18 +55,42 @@ export default function ImageSearchModal({
   onClose,
   setBackgroundImg,
 }: ImageSearchModalProps) {
-  const [img, setImg] = useState('');
-  const [searchResults, setsearchResults] = useState([]);
+  const imgRef = useRef<HTMLInputElement>(null);
+  const [searchResults, setsearchResults] = useState<any[]>([]);
+  const [pageInfo, setPageInfo] = useState({
+    page: 1,
+    totalPage: 1,
+  });
 
-  const url = `https://api.unsplash.com/search/photos?page=1&query=${img}&client_id=${VITE_UNSPLASH_ACCESS_KEY}&orientation=landscape&per_page=20`;
-  const fetchRequest = async () => {
-    const response = await (await fetch(url)).json();
-    const result = response.results;
-    setsearchResults(result);
+  const [isFetching, setIsFetching] = useState(false);
+  const [target, setTarget] = useState<Element | null>(null);
+
+  const fetchImage = async () => {
+    setIsFetching(true);
+    try {
+      if (!imgRef.current || !imgRef.current.value) return;
+
+      const response: UnsplashResponse = await (
+        await fetch(
+          `https://api.unsplash.com/search/photos?query=${imgRef.current.value}&client_id=${VITE_UNSPLASH_ACCESS_KEY}&page=${pageInfo.page}&per_page=20`
+        )
+      ).json();
+      const { results, total_pages: totalPage } = response;
+      setsearchResults((prev) => [...prev, ...results]);
+      setPageInfo((prev) => ({
+        ...prev,
+        totalPage,
+      }));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsFetching(false);
+    }
   };
 
-  const handleSubmit = () => {
-    fetchRequest();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetchImage();
   };
 
   const handleClickImg = (imgUrl: string) => {
@@ -69,33 +98,67 @@ export default function ImageSearchModal({
     onClose();
   };
 
+  const handleIntersect = useCallback(
+    ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting) {
+        setPageInfo((prev) => {
+          if (prev.totalPage > prev.page) {
+            return {
+              ...prev,
+              page: prev.page + 1,
+            };
+          }
+          return prev;
+        });
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.5,
+      root: document.getElementById('scrollRoot'),
+    });
+    if (target) observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [handleIntersect, target]);
+
+  useEffect(() => {
+    fetchImage();
+  }, [pageInfo.page]);
+
   return (
     <Modal onClose={onClose}>
-      <>
-        <div>
+      <div>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <StyledInput
             type="text"
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
-            placeholder="Searching your Background Image"
+            ref={imgRef}
+            placeholder="Search your Background Image"
           />
-          <Button type="submit" onClick={handleSubmit} variant="yellow">
+          <Button type="submit" variant="yellow">
             Search
           </Button>
-        </div>
+        </form>
         <ImageContainer>
-          {searchResults.map((val: ImageValue) => {
+          {searchResults.map((val: ImageValue, i) => {
             return (
               <Image
                 key={val.id}
                 src={val.urls.thumb}
                 alt={val.alt_description}
                 onClick={() => handleClickImg(val.urls.regular)}
+                ref={searchResults.length - 1 === i ? setTarget : null}
               />
             );
           })}
+          {isFetching && '로딩중...'}
         </ImageContainer>
-      </>
+      </div>
     </Modal>
   );
 }

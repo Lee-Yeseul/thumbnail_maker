@@ -87,7 +87,7 @@ export default function Modal({ onClose, children }: ModalProps) {
   return (
     <ModalContainer>
       <Overlay>
-        <ModalWrapper ref={modalRef}>
+        <ModalWrapper ref={modalRef} id="scrollRoot">
           <CloseButton onClick={handleClose}>
             <CloseIcon />
           </CloseButton>
