@@ -10,8 +10,7 @@ type StyledBtnProps = {
 type ButtonProps = {
   children: ReactNode;
   variant: ColorPalette;
-  onClick: () => void;
-  // eslint-disable-next-line react/require-default-props
+  onClick?: () => void;
   type?: 'submit' | 'button' | 'reset';
 };
 
@@ -44,6 +43,15 @@ const StyleBtn = styled.button<StyledBtnProps>`
   }
 `;
 
-export default function Button({ children, ...props }: ButtonProps) {
-  return <StyleBtn {...props}>{children}</StyleBtn>;
+export default function Button({
+  children,
+  variant,
+  onClick,
+  type = 'button',
+}: ButtonProps) {
+  return (
+    <StyleBtn variant={variant} onClick={onClick} type={type}>
+      {children}
+    </StyleBtn>
+  );
 }
