@@ -47,8 +47,6 @@ type UnsplashResponse = {
  * @todo
  * fetch error boundary 추가하기
  * searchResults 배열이 비었을 때 보여줄 내용 추가하기
- * enter 클릭시 search 되도록
- * search debounce 추가하기
  *
  */
 export default function ImageSearchModal({
@@ -62,11 +60,11 @@ export default function ImageSearchModal({
     totalPage: 1,
   });
 
-  const [isFetching, setIsFetching] = useState(false);
+  const [loading, isLoading] = useState(false);
   const [target, setTarget] = useState<Element | null>(null);
 
   const fetchImage = async () => {
-    setIsFetching(true);
+    isLoading(true);
     try {
       if (!imgRef.current || !imgRef.current.value) return;
 
@@ -84,7 +82,7 @@ export default function ImageSearchModal({
     } catch (err) {
       console.log(err);
     } finally {
-      setIsFetching(false);
+      isLoading(false);
     }
   };
 
@@ -145,18 +143,20 @@ export default function ImageSearchModal({
           </Button>
         </form>
         <ImageContainer>
-          {searchResults.map((val: ImageValue, i) => {
-            return (
-              <Image
-                key={val.id}
-                src={val.urls.thumb}
-                alt={val.alt_description}
-                onClick={() => handleClickImg(val.urls.regular)}
-                ref={searchResults.length - 1 === i ? setTarget : null}
-              />
-            );
-          })}
-          {isFetching && '로딩중...'}
+          {searchResults
+            ? searchResults.map((val: ImageValue, i) => {
+                return (
+                  <Image
+                    key={val.id}
+                    src={val.urls.thumb}
+                    alt={val.alt_description}
+                    onClick={() => handleClickImg(val.urls.regular)}
+                    ref={searchResults.length - 1 === i ? setTarget : null}
+                  />
+                );
+              })
+            : 'No Result'}
+          {loading && 'Loading...'}
         </ImageContainer>
       </div>
     </Modal>
