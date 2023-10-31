@@ -5,6 +5,7 @@ import { colorPaletteValue } from '@src/assets/colorPalette';
 
 type StyledBtnProps = {
   readonly variant: ColorPalette;
+  readonly width: string;
 };
 
 type ButtonProps = {
@@ -12,6 +13,7 @@ type ButtonProps = {
   variant: ColorPalette;
   onClick?: () => void;
   type?: 'submit' | 'button' | 'reset';
+  width?: string;
 };
 
 const hoverBackgroundColor = {
@@ -28,8 +30,9 @@ const hoverBackgroundColor = {
 };
 
 const StyleBtn = styled.button<StyledBtnProps>`
+  width: ${(props) => (props.width ? props.width : '')};
   padding: 6px 12px;
-  margin: 6px 12px 6px 0;
+  margin: 6px;
   border-radius: 4px;
   font-size: 1rem;
   text-transform: uppercase;
@@ -48,9 +51,10 @@ export default function Button({
   variant,
   onClick,
   type = 'button',
+  width = '',
 }: ButtonProps) {
   return (
-    <StyleBtn variant={variant} onClick={onClick} type={type}>
+    <StyleBtn variant={variant} onClick={onClick} type={type} width={width}>
       {children}
     </StyleBtn>
   );

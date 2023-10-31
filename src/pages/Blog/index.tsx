@@ -9,6 +9,7 @@ import Title from '@components/common/Title';
 import Button from '@components/common/Button';
 import ViewTypePicker from '@src/components/ViewTypePicker';
 import { ViewType } from '@src/types';
+import { saveCaptureImg } from '@src/utils';
 
 type PreviewPaletteProps = {
   readonly backgroundColor: string[];
@@ -68,27 +69,22 @@ export default function Blog() {
   const [title, setTitle] = useState(INITIAL_TITLE);
   const [subtitle, setSubtitle] = useState(INITIAL_SUBTITLE);
   const [backgroundImg, setBackgroundImg] = useState<string>('');
-  const [viewType, setViewType] = useState<ViewType>('notion');
-
-  const saveCaptureImg = (uri: string, filename: string) => {
-    const link = document.createElement('a');
-    if (typeof link.download === 'string') {
-      link.href = uri;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(uri);
-    }
-  };
+  const [viewType, setViewType] = useState<ViewType>('blog');
 
   const handleSaveImg = () => {
-    const capture: HTMLElement | null = document.querySelector('#capture');
-    if (capture !== null) {
-      html2canvas(capture).then((canvas) =>
-        saveCaptureImg(canvas.toDataURL('image/jpg'), '이미지.jpg')
-      );
+    try {
+      const capture: HTMLElement | null = document.querySelector('#capture');
+      if (capture !== null) {
+        html2canvas(capture).then((canvas) =>
+          saveCaptureImg(
+            canvas.toDataURL('image/jpg'),
+            `${viewType}_이미지.jpg`
+          )
+        );
+      }
+      alert('이미지가 다운로드 되었습니다.');
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -113,7 +109,12 @@ export default function Blog() {
         <Title variant="title">{title}</Title>
         <Title variant="subtitle">{subtitle}</Title>
       </PreviewPalette>
+
       <div>
+        <TextInput
+          setTitle={(text: string) => setTitle(text)}
+          setSubtitle={(text: string) => setSubtitle(text)}
+        />
         <ViewTypePicker
           viewType={viewType}
           setViewType={(type: ViewType) => setViewType(type)}
@@ -131,10 +132,6 @@ export default function Blog() {
         />
         <TextColorPicker
           setSelectedColor={(color: string) => setSelectedTextColor(color)}
-        />
-        <TextInput
-          setTitle={(text: string) => setTitle(text)}
-          setSubtitle={(text: string) => setSubtitle(text)}
         />
       </div>
       <div>

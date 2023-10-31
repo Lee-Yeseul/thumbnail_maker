@@ -9,7 +9,7 @@ import RandomButton from '@components/common/RandomButton';
 import ImageSearchModal from '@components/ImageSearchModal';
 import AddCustomImageModal from '@components/AddCustomImageModal';
 import { ColorPalette } from '@src/types';
-import randomRGB from '@src/utils';
+import { randomRGB } from '@src/utils';
 
 const Container = styled.div`
   margin-bottom: 20px;
