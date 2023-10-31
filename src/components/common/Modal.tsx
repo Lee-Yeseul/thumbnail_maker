@@ -72,7 +72,6 @@ export default function Modal({ onClose, children }: ModalProps) {
 
   useOutSideClick(modalRef, handleClose);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     const $body = document.querySelector('body');
     if ($body !== null) {

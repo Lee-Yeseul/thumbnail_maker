@@ -2,6 +2,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
+import Spinner from './common/Spinner';
 
 const { VITE_UNSPLASH_ACCESS_KEY } = import.meta.env;
 
@@ -40,7 +41,7 @@ type ImageValue = {
 };
 
 type UnsplashResponse = {
-  results: any[];
+  results: ImageValue[];
   total_pages: number;
 };
 /**
@@ -54,7 +55,7 @@ export default function ImageSearchModal({
   setBackgroundImg,
 }: ImageSearchModalProps) {
   const imgRef = useRef<HTMLInputElement>(null);
-  const [searchResults, setsearchResults] = useState<any[]>([]);
+  const [searchResults, setsearchResults] = useState<ImageValue[]>([]);
   const [pageInfo, setPageInfo] = useState({
     page: 1,
     totalPage: 1,
@@ -88,7 +89,9 @@ export default function ImageSearchModal({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setsearchResults([]);
     fetchImage();
+    console.log(searchResults);
   };
 
   const handleClickImg = (imgUrl: string) => {
@@ -143,20 +146,18 @@ export default function ImageSearchModal({
           </Button>
         </form>
         <ImageContainer>
-          {searchResults
-            ? searchResults.map((val: ImageValue, i) => {
-                return (
-                  <Image
-                    key={val.id}
-                    src={val.urls.thumb}
-                    alt={val.alt_description}
-                    onClick={() => handleClickImg(val.urls.regular)}
-                    ref={searchResults.length - 1 === i ? setTarget : null}
-                  />
-                );
-              })
-            : 'No Result'}
-          {loading && 'Loading...'}
+          {searchResults.map((val: ImageValue, i) => {
+            return (
+              <Image
+                key={val.id}
+                src={val.urls.thumb}
+                alt={val.alt_description}
+                onClick={() => handleClickImg(val.urls.regular)}
+                ref={searchResults.length - 1 === i ? setTarget : null}
+              />
+            );
+          })}
+          {loading && <Spinner />}
         </ImageContainer>
       </div>
     </Modal>
