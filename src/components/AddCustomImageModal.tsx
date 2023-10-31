@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
+import { encodeFileToBase64 } from '@src/utils';
 
 const StyledInput = styled.input`
   width: 400px;
@@ -30,10 +31,16 @@ export default function AddCustomImageModal({
   onClose,
   setBackgroundImg,
 }: ImageSearchModalProps) {
-  const [img, setImg] = useState('');
+  const [previewImg, setPreviewImg] = useState('');
+
+  const handleImgUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const imgURL = await encodeFileToBase64(e.target.files[0]);
+    setPreviewImg(imgURL);
+  };
 
   const handleSubmit = () => {
-    setBackgroundImg(img);
+    setBackgroundImg(previewImg);
     onClose();
   };
 
@@ -41,14 +48,17 @@ export default function AddCustomImageModal({
     <Modal onClose={onClose}>
       <div>
         <StyledInput
-          type="text"
-          value={img}
-          onChange={(e) => setImg(e.target.value)}
+          type="file"
+          accept="image/*"
+          onChange={(e) => handleImgUpload(e)}
           placeholder="Please enter a background image."
         />
         <Button type="submit" onClick={handleSubmit} variant="yellow">
           Search
         </Button>
+      </div>
+      <div>
+        <img src={previewImg} />
       </div>
     </Modal>
   );

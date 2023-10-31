@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colorPaletteValue } from '@src/assets/colorPalette';
 import Button from '@components/common/Button';
 import { ColorPalette } from '@src/types';
-import randomRGB from '@src/utils';
+import { randomRGB } from '@src/utils';
 
 const Container = styled.div`
   margin-bottom: 20px;

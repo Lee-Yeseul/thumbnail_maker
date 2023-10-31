@@ -1,4 +1,4 @@
-import randomRGB from '../utils/index';
+import { randomRGB } from '../utils/index';
 
 describe('randomRGB', () => {
   test('returns a valid RGB color string', () => {
