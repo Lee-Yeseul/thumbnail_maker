@@ -14,7 +14,7 @@ const StyledInput = styled.input`
 `;
 
 const Container = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 type TextInputProps = {

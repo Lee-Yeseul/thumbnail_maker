@@ -7,6 +7,11 @@ import useOutSideClick from '@src/hooks/useOutSideClick';
 type ModalProps = {
   onClose: () => void;
   children: ReactNode;
+  width?: string;
+};
+
+type ModalWrapperProps = {
+  width: string;
 };
 
 const Overlay = styled.div`
@@ -21,10 +26,10 @@ const Overlay = styled.div`
   z-index: 9999;
 `;
 
-const ModalWrapper = styled.div`
-  width: 700px;
+const ModalWrapper = styled.div<ModalWrapperProps>`
+  width: ${(props) => props.width};
   height: fit-content;
-  border-radius: 15px;
+  border-radius: 8px;
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -34,9 +39,9 @@ const ModalWrapper = styled.div`
 
 const CloseButton = styled.div`
   float: right;
-  width: 40px;
-  height: 40px;
-  margin: 20px;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
   cursor: pointer;
   i {
     color: #5d5d5d;
@@ -64,7 +69,11 @@ const Contents = styled.div`
   }
 `;
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function Modal({
+  onClose,
+  children,
+  width = '700px',
+}: ModalProps) {
   const modalRef = useRef(null);
   const handleClose = () => {
     onClose?.();
@@ -86,7 +95,7 @@ export default function Modal({ onClose, children }: ModalProps) {
   return (
     <ModalContainer>
       <Overlay>
-        <ModalWrapper ref={modalRef} id="scrollRoot">
+        <ModalWrapper ref={modalRef} id="scrollRoot" width={width}>
           <CloseButton onClick={handleClose}>
             <CloseIcon />
           </CloseButton>

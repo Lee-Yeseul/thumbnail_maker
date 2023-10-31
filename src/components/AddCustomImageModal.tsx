@@ -4,28 +4,37 @@ import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 import { encodeFileToBase64 } from '@src/utils';
 
-const StyledInput = styled.input`
-  width: 400px;
-  height: 32px;
-  margin: 4px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 4px;
-  outline: none;
-  padding-left: 10px;
-  background-color: #fef9c3;
+const Input = styled.input`
+  display: none;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ImgPreview = styled.label`
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: lightgray;
+  font-weight: 500;
+  &:hover {
+    cursor: pointer;
+    background: gray;
+    transition: 0.5s;
+  }
 `;
 
 type ImageSearchModalProps = {
   onClose: () => void;
   setBackgroundImg: (url: string) => void;
 };
-/**
- * @todo
- * open image가 아닐 경우 html2canvas로 다운로드가 안됨
- * 해당 부분 에러 처리하기
- *
- */
 
 export default function AddCustomImageModal({
   onClose,
@@ -45,21 +54,30 @@ export default function AddCustomImageModal({
   };
 
   return (
-    <Modal onClose={onClose}>
-      <div>
-        <StyledInput
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleImgUpload(e)}
-          placeholder="Please enter a background image."
-        />
-        <Button type="submit" onClick={handleSubmit} variant="yellow">
-          Search
+    <Modal onClose={onClose} width="420px">
+      <Container>
+        <ImgPreview htmlFor="img-picker">
+          <Input
+            id="img-picker"
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleImgUpload(e)}
+          />
+          {previewImg ? (
+            <img src={previewImg} width="300" />
+          ) : (
+            <div>choose your image</div>
+          )}
+        </ImgPreview>
+        <Button
+          type="submit"
+          onClick={handleSubmit}
+          variant="yellow"
+          width="300px"
+        >
+          update
         </Button>
-      </div>
-      <div>
-        <img src={previewImg} />
-      </div>
+      </Container>
     </Modal>
   );
 }
